@@ -23,11 +23,11 @@ class ElementsManager
     end
 
     #Returns the element count for key
-    def getElement(key)
+    def get_element(key)
       @elements[key]
     end
 
-    def getElements
+    def get_elements
       @elements.keys
     end
 
