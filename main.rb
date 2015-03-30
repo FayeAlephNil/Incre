@@ -1,20 +1,14 @@
-require_relative 'lib/sampleincrementable'
+require_relative 'lib/elements'
+require_relative 'lib/producers'
 
-$incrementable_count = Hash.new
-$incrementable_count.default = 0
-$incrementable_vals = Hash.new
-$incrementable_vals.default = 0
-$incrementables = Array.new
-
-SampleIncrementable.new
+manager = ElementsManager.new
+ProducerManager.new 'air', 10, 1, manager
+ProducerManager.new 'earth', 5, 1, manager
 
 loop do # Main loop
-  $incrementables.each do |incrementable|
-    if incrementable != nil
-      incrementable.tick
-    end
-  end
+  manager.tick
   sleep 1
-  p $incrementable_count
-  p $incrementable_vals
+  manager.getElements.each do |key|
+    p "We have #{manager.getElement key} elements of #{key}"
+  end
 end
