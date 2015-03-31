@@ -10,7 +10,7 @@ class ProducerManager
         @element = element
         @name = name
         @rate = rate
-        if manager != nil then manager.producers << self end
+        if manager != nil then manager.producers[name] = self end
     end
 
     def tick(manager)

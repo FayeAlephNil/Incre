@@ -3,14 +3,31 @@ class ElementsManager
     attr_accessor :producers
 
     #Initialize a new hash of elements and an array of producers
-    def initialize(elements = Hash.new(0), producers = [])
+    def initialize(elements = Hash.new(-1), producers = Hash.new(ProducerManager.new('null', 0, name = 'null', 0, self)))
         @elements = elements
         @producers = producers
     end
 
-    #Produce some elements
-    def produce(key, amount = 0)
-       @elements[key] += amount
+    #Production of things
+    def produce_element(key, amount = 0)
+      if @elements[key] == -1 then @elements[key] = 0 end
+      @elements[key] += amount
+    end
+
+    def produce_producer(key, amount = 0)
+      if @producers[key] != ProducerManager.new('null', 0, name = 'null', 0, self) then
+        @producers[key].count += amount
+      else
+        raise "Tryed to add to the count of a null ProducerManager"
+      end
+    end
+
+    def produce_general(key, amount = 0)
+      if @producers[key] != ProducerManager.new('null', 0, name = 'null', 0, self) then
+        produce_producer key, amount
+      elsif @elements[key] != -1
+        produce_element key, amount
+      end
     end
 
     #Use some of the elements. Returns false if the result is less than zero and true otherwise
