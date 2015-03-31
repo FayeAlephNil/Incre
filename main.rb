@@ -13,6 +13,6 @@ loop do # Main loop
   end
 
   manager.producers.each do |key, producer|
-    p "We have #{producer.count} #{producer.name}s"
+    p "We have #{producer.count} #{key}s"
   end
 end

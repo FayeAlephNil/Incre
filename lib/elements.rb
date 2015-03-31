@@ -3,7 +3,7 @@ class ElementsManager
     attr_accessor :producers
 
     #Initialize a new hash of elements and an array of producers
-    def initialize(elements = Hash.new(-1), producers = Hash.new(ProducerManager.new('null', 0, name = 'null', 0)))
+    def initialize(elements = Hash.new(-1), producers = Hash.new(ProducerManager.new('null', 0, 'null', 0)))
         @elements = elements
         @producers = producers
     end
@@ -15,7 +15,7 @@ class ElementsManager
     end
 
     def produce_producer(key, amount = 0)
-      if @producers[key] != ProducerManager.new('null', 0, name = 'null', 0, self) then
+      if @producers[key] != ProducerManager.new('null', 0, 'null', 0, self)
         @producers[key].count += amount
       else
         raise "Tryed to add to the count of a null ProducerManager"
@@ -23,7 +23,7 @@ class ElementsManager
     end
 
     def produce_general(key, amount = 0)
-      if @producers[key] != ProducerManager.new('null', 0, name = 'null', 0, self) then
+      if @producers[key] != ProducerManager.new('null', 0, 'null', 0, self)
         produce_producer key, amount
       elsif @elements[key] != -1
         produce_element key, amount
@@ -32,7 +32,7 @@ class ElementsManager
 
     #Use some of the elements. Returns false if the result is less than zero and true otherwise
     def use(key, amount = 0)
-        if @elements[key] >= amount then
+        if @elements[key] >= amount
             @elements[key] -= amount
             return true
         end
@@ -51,7 +51,7 @@ class ElementsManager
     #Tick this ElementsManager
     def tick
         #Cascade ticks down to producers
-        producers.each do |key, producer|
+        producers.values.each do |producer|
             producer.tick self
         end
     end

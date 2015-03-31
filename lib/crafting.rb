@@ -13,7 +13,7 @@ class CraftingManager
   def craft(ingredients, first_element = false)
     product = @recipes[ingredients]
     if product != nil
-      if first_element then
+      if first_element
         @manager.produce_element(product, 1)
       else
         @manager.produce_general(product, 1)
