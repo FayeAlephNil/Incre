@@ -1,9 +1,11 @@
-require_relative 'lib/elements'
-require_relative 'lib/producers'
+require_relative 'lib/game'
+require_relative 'lib/producer'
+require_relative 'lib/element'
 
-manager = ElementsManager.new
-ProducerManager.new 'air', 10, 'Air Producer', 1, manager
-ProducerManager.new 'earth', 5, 'Earth Producer', 1, manager
+
+manager = GameManager.new
+ProducerManager.new 'air', 10, 'Air Producer', manager, 1
+ProducerManager.new 'earth', 5, 'Earth Producer', manager, 1
 
 loop do # Main loop
   manager.tick

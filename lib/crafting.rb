@@ -10,13 +10,14 @@ class CraftingManager
     @recipes[ingredients] = product
   end
 
-  def craft(ingredients, first_element = false)
+  def craft(ingredients, first = false)
     product = @recipes[ingredients]
+    product.count = 1
     if product != nil
       if first_element
-        @manager.produce_element(product, 1)
+        @manager.sub_managers[product.name] = product
       else
-        @manager.produce_general(product, 1)
+        @manager.produce product.name, 1
       end
     end
   end
