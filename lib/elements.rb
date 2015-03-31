@@ -3,7 +3,7 @@ class ElementsManager
     attr_accessor :producers
 
     #Initialize a new hash of elements and an array of producers
-    def initialize(elements = Hash.new(-1), producers = Hash.new(ProducerManager.new('null', 0, name = 'null', 0, self)))
+    def initialize(elements = Hash.new(-1), producers = Hash.new(ProducerManager.new('null', 0, name = 'null', 0)))
         @elements = elements
         @producers = producers
     end
@@ -51,7 +51,7 @@ class ElementsManager
     #Tick this ElementsManager
     def tick
         #Cascade ticks down to producers
-        producers.each do |producer|
+        producers.each do |key, producer|
             producer.tick self
         end
     end

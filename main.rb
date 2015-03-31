@@ -12,7 +12,7 @@ loop do # Main loop
     p "We have #{manager.get_element key} elements of #{key}"
   end
 
-  manager.producers.each do |producer|
+  manager.producers.each do |key, producer|
     p "We have #{producer.count} #{producer.name}s"
   end
 end

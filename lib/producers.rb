@@ -14,6 +14,6 @@ class ProducerManager
     end
 
     def tick(manager)
-      manager.produce(@element, @count * @rate)
+      manager.produce_element(@element, @count * @rate)
     end
 end
