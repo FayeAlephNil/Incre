@@ -7,14 +7,15 @@ $incrementable_vals.default = 0
 $incrementables = Array.new
 
 SampleIncrementable.new
+IncrementableManager.vals[:sample_gain] = 5
 
 loop do # Main loop
-  $incrementables.each do |incrementable|
+  IncrementableManager.incrementables.each do |incrementable| # Tick each incrementable
     if incrementable != nil
       incrementable.tick
     end
   end
   sleep 1
-  p $incrementable_count
-  p $incrementable_vals
+  p IncrementableManager.count
+  p IncrementableManager.vals
 end
