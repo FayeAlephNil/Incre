@@ -51,8 +51,18 @@ class ElementsManager
     #Tick this ElementsManager
     def tick
         #Cascade ticks down to producers
-        producers.values.each do |producer|
+        @producers.values.each do |producer|
             producer.tick self
+        end
+    end
+    
+    def log_vals
+        @producers.each do |key, producer|
+            p "There are #{producer.count} #{key}"
+        end
+        
+        @elements.each do |key, count|
+           p "There are #{count} of #{key} element(s)" 
         end
     end
 end
