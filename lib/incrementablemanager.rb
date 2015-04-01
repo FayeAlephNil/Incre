@@ -1,25 +1,10 @@
 class IncrementableManager
-  @@count = Hash.new
-  @@vals = Hash.new
-  @@incrementables = Array.new
-  @@count.default = 0
-  @@vals.default = 0
-  def self.count
-    @@count
+  def initialize
+    @incrementable_count = Hash.new
+    @vals = Hash.new
+    @incrementables = Array.new
+    @incrementable_count.default = 0
+    @vals.default = 0
   end
-  def self.count=(args)
-    @@count = args
-  end
-  def self.vals
-    @@vals
-  end
-  def self.vals=(args)
-    @@vals = args
-  end
-  def self.incrementables
-    @@incrementables
-  end
-  def self.incrementables=(args)
-    @@incrementables = args
-  end
+  attr_accessor :incrementable_count, :vals, :incrementables
 end
