@@ -7,10 +7,15 @@ class SubManager
     @name = name
     @type = type
     @count = count
-    if manager != nil then manager.add_manager self end
+    @manager = manager
+    if manager != nil then manager.add_manager! self end
   end
 
   #Placeholder for subs to override if they need to
   def tick(manager)
+  end
+
+  def to_eval
+    return "SubManager.new(#{@name.to_eval}, #{@type}, #{@count})"
   end
 end

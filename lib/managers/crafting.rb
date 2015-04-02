@@ -18,14 +18,16 @@ class CraftingManager
         if first_element
           @manager.sub_managers[product.name] = product
         else
-          @manager.produce product.name, 1
+          @manager.produce!(product.name, 1)
         end
       end
 
       ingredients.each do |key, amount|
-        @manager.use key, amount
+        @manager.use!(key, amount)
       end
+      return true
     end
+    return false
   end
 
   def checker(ingredients)

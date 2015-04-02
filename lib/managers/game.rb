@@ -1,3 +1,5 @@
+require_relative '../util/ruby_changes'
+
 class GameManager
     #Allow access so that ProducerManagers can add themselves
     attr_reader :sub_managers
@@ -8,7 +10,7 @@ class GameManager
     end
 
     #Production of things
-    def produce(key, amount = 0)
+    def produce!(key, amount = 0)
       if @sub_managers[key] == nil
         raise 'Tryed to produce something which has not been added to the list of sub-managers'
       end
@@ -16,7 +18,7 @@ class GameManager
     end
 
     #Use something. Returns false (and doesn't use) if the result is less than zero and true otherwise
-    def use(key, amount = 0)
+    def use!(key, amount = 0)
         if @sub_managers[key].count >= amount
             @sub_managers[key].count -= amount
             return true
@@ -24,12 +26,12 @@ class GameManager
         return false
     end
 
-    def add_manager(sub_manager)
+    def add_manager!(sub_manager)
       @sub_managers[sub_manager.name] = sub_manager
     end
 
     #Tick this GameManager
-    def tick
+    def tick!
         #Cascade ticks down to subs
         @sub_managers.values.each do |sub_manager|
           sub_manager.tick self
@@ -40,5 +42,17 @@ class GameManager
       @sub_managers.each do |key, sub_manager|
         p "There are #{sub_manager.count} of #{key}"
       end
+    end
+
+    def to_eval
+      if @sub_managers.empty?
+        return 'GameManager.new'
+      end
+
+      return "GameManager.new(#{@sub_managers.to_eval})"
+    end
+
+    def load(saved)
+      eval(saved)
     end
 end
