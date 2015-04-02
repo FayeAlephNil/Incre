@@ -1,9 +1,6 @@
 require_relative '../util/ruby_changes'
 
 class GameManager
-    #Allow access so that ProducerManagers can add themselves
-    attr_reader :sub_managers
-
     #Initialize a new hash of elements and an array of producers
     def initialize(sub_managers = Hash.new(nil))
       @sub_managers = sub_managers
@@ -28,6 +25,14 @@ class GameManager
 
     def add_manager!(sub_manager)
       @sub_managers[sub_manager.name] = sub_manager
+    end
+
+    def get_manager(key)
+      return @sub_managers[key]
+    end
+
+    def get_subs
+      return @sub_managers.clone
     end
 
     #Tick this GameManager
