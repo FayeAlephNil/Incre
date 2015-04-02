@@ -7,7 +7,6 @@ class SubManager
     @name = name
     @type = type
     @count = count
-    @manager = manager
     if manager != nil then manager.add_manager! self end
   end
 
@@ -16,6 +15,6 @@ class SubManager
   end
 
   def to_eval
-    return "SubManager.new(#{@name.to_eval}, #{@type}, #{@count})"
+    return "SubManager.new(#{@name.to_eval}, #{@type.to_eval}, #{@count})"
   end
 end
