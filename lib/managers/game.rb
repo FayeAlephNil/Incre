@@ -52,7 +52,7 @@ class GameManager
       return "GameManager.new(#{@sub_managers.to_eval})"
     end
 
-    def load(saved)
-      eval(saved)
+    def self.load
+      return eval(saved)
     end
 end
