@@ -14,6 +14,10 @@ class CraftingManager
     return self
   end
 
+  def add_recipe(ingredients, product)
+    self.clone.add_recipe!(ingredients, product)
+  end
+
   def craft(ingredients, first = false, manager = @manager)
     if manager == nil then raise 'Did not provide a manager for this CraftingManager craft operation' end
 
