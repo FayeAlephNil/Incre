@@ -17,4 +17,12 @@ class SubManager
   def to_eval
     return "SubManager.new(#{@name.to_eval}, #{@type.to_eval}, #{@count})"
   end
+
+  def eql?(other)
+    if @name != other.name || @type != other.type || @count != other.count
+      return false
+    end
+
+    return true
+  end
 end

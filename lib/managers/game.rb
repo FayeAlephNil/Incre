@@ -80,6 +80,15 @@ class GameManager
       return "GameManager.new(#{@sub_managers.to_eval})"
     end
 
+    def eql?(other)
+      @sub_managers.each do |key, value|
+        if !(other.get_subs[key].eql?(value))
+          return false
+        end
+      end
+      return true
+    end
+
     def self.load
       return eval(saved)
     end
