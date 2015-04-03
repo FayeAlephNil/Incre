@@ -42,23 +42,43 @@ class CraftingManager
 
   def check(ingredients, manager = @manager)
     if manager == nil then raise 'Did not provide a manager for this CraftingManager check' end
+    result = true
+    threads = []
 
     ingredients.each do |key, count|
-      if manager.get_subs[key] = nil || (manager.get_subs[key].count < count)
-        return false
-      end
+      threads << Thread.new {
+        if manager.get_subs[key] = nil || (manager.get_subs[key].count < count)
+          result = false
+        end
+      }
     end
-    return true
+
+    threads.each { |thr|
+      thr.join
+      if !result then break end
+    }
+
+    return result
   end
 
   def eql?(other)
+    result = true
+    threads = []
+
     @recipes.each do |key, value|
-      if !(other.recipes[key].eql?(value))
-        return false
-      end
+      threads << Thread.new {
+        if !(other.recipes[key].eql?(value))
+          result = false
+        end
+      }
     end
 
-    return true
+    threads.each { |thr|
+      thr.join
+      if !result then break end
+    }
+
+    return result
   end
 
   def to_eval

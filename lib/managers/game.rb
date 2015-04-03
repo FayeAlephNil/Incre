@@ -89,11 +89,21 @@ class GameManager
   def eql?(other)
     if !(@crafter.eql?(other.crafter)) then return false end
 
+    result = true
+    threads = []
+
     @sub_managers.each do |key, value|
-      if !(other.get_subs[key].eql?(value)) then return false end
+      threads << Thread.new {
+        if !(other.get_subs[key].eql?(value)) then result = false end
+      }
     end
     
-    return true
+    threads.each { |thr|
+      thr.join
+      if !result then break end
+    }
+
+    return result
   end
 
   def self.load
