@@ -12,10 +12,7 @@ manager.crafter.add_recipe!({'Air Producer' => 1, 'Earth Producer' => 1}, Produc
 
 loop do # Main loop
   clone = manager.clone
-  threads = []
-  threads << Thread.new { clone.log_vals }
-  threads << Thread.new { manager = clone.tick }
-  threads.each { |thr| thr.join }
-
+  Thread.new { manager =  clone.tick }.join
+  clone.log_vals
   sleep 1
 end
