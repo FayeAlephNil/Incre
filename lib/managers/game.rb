@@ -2,7 +2,7 @@ require_relative '../util/ruby_changes'
 
 class GameManager
     #Initialize a new hash of elements and an array of producers
-    def initialize(sub_managers = Hash.new(nil))
+    def initialize(sub_managers = Hash.new)
       @sub_managers = sub_managers
     end
 
