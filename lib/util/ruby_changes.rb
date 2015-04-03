@@ -23,8 +23,8 @@ class Hash
 
   def to_eval
     result = []
-    each do |key, producer|
-      result << "#{key.to_eval} => #{producer.to_eval}"
+    each do |key, value|
+      result << "#{key.to_eval} => #{value.to_eval}"
     end
     hash = "{#{result.join ", "}}"
 
