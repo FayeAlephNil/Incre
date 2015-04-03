@@ -6,7 +6,4 @@ class ElementManager < SubManager
     def initialize(name, manager = nil, count = 0)
       super(name, 'element', count, manager)
     end
-
-    def tick(manager)
-    end
 end
