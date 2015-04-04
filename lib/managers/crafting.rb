@@ -24,7 +24,7 @@ class CraftingManager
     if check(ingredients)
       if product != nil
         if first
-          manager.sub_managers[product.name] = product
+          manager.add_manager! product
         else
           manager.produce!(product.name, 1)
         end
