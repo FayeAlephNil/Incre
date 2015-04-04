@@ -108,7 +108,27 @@ class GameManager
     return result
   end
 
-  def self.load(saved)
-    return eval(saved)
+  def save
+    begin
+      File.write('./save', self.inspect)
+    rescue IOError
+      return false
+    end
+    return true
+  end
+
+  def self.uninspect(inspected)
+    return eval(inspected)
+  end
+
+  def self.load(file = File.open('save', 'a+'))
+    to_load = file.read
+    file.close
+
+    if to_load == '' then
+      return GameManager.new
+    end
+
+    return self.uninspect(to_load)
   end
 end
