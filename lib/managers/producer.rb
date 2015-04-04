@@ -20,10 +20,6 @@ class ProducerManager < SubManager
       end
     end
 
-    def to_eval
-      return "ProducerManager.new(#{@element.to_eval}, #{@rate}, #{@name.to_eval}, nil, #{@count})"
-    end
-
     def inspect
       return "ProducerManager.new(#{@element.inspect}, #{@rate}, #{@name.inspect}, nil, #{@count})"
     end

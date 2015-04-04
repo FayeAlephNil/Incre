@@ -26,6 +26,10 @@ class GameManager
 
   #Use something. Returns false (and doesn't use) if the result is less than zero and true otherwise
   def use!(key, amount = 0)
+    if @sub_managers[key] == nil
+      raise 'Tryed to use something which has not been added to the list of sub-managers'
+    end
+
     if @sub_managers[key].count >= amount
       @sub_managers[key].count -= amount
         return true
@@ -100,7 +104,7 @@ class GameManager
     return result
   end
 
-  def self.load
+  def self.load(saved)
     return eval(saved)
   end
 end

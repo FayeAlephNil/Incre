@@ -21,9 +21,9 @@ class CraftingManager
 
     product = @recipes[ingredients]
     product.count = 1
-    if checker(ingredients)
+    if check(ingredients)
       if product != nil
-        if first_element
+        if first
           manager.sub_managers[product.name] = product
         else
           manager.produce!(product.name, 1)
@@ -45,7 +45,7 @@ class CraftingManager
 
     ingredients.each do |key, count|
       threads << Thread.new {
-        if manager.get_subs[key] = nil || (manager.get_subs[key].count < count)
+        if manager.get_subs[key] == nil || (manager.get_subs[key].count < count)
           result = false
         end
       }
