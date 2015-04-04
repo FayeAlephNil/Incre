@@ -77,10 +77,6 @@ class GameManager
   end
 
   def inspect
-    if @sub_managers.empty?
-      return 'GameManager.new'
-    end
-
     return "GameManager.new(#{@sub_managers.inspect}, #{@crafter.inspect})"
   end
 
