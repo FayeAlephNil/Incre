@@ -2,7 +2,7 @@ require_relative 'lib/managers/game'
 
 require_relative 'lib/managers/producer'
 
-p 'Do you want to load the save? (y/n)'
+p 'Do you want to load a save? (y/n)'
 manager = if gets.chomp == 'y'
             p 'What save do you want to load'
             GameManager.load gets.chomp

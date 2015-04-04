@@ -116,4 +116,4 @@ sftp-config.json
 ### Incre Specific ###
 
 #The save file
-save
+*.save

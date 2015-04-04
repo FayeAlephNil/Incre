@@ -110,7 +110,7 @@ class GameManager
 
   def save(path)
     begin
-      File.write(path, self.inspect)
+      File.write(path + '.save', self.inspect)
     rescue IOError
       return false
     end
@@ -122,7 +122,7 @@ class GameManager
   end
 
   def self.load(path = 'save')
-    File.open(path, 'a+') do |file|
+    File.open(path + '.save', 'a+') do |file|
       to_load = file.read
       if to_load == '' then return GameManager.new end
       return self.uninspect(to_load)
