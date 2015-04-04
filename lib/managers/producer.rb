@@ -2,32 +2,32 @@ require_relative 'sub'
 require_relative 'element'
 
 class ProducerManager < SubManager
-    attr_reader :element
-    attr_accessor :rate
+    attr_accessor :rates
 
     # Rate is how many elements will be produced per count per tick. Element is the symbol to be produced in the ElementManager.
-    def initialize(element, rate, name, manager = nil, count = 0)
+    def initialize(rates, name, manager = nil, count = 0)
       super(name, 'producer', count, manager)
-      @element = element
-      @rate = rate
+      @rates = rates
     end
 
     def tick(manager)
-      if manager.get_subs[@element] == nil
-        ElementManager.new(@element, manager, @count * @rate)
-      else
-        manager.produce!(@element, @count * @rate)
+      @rates.each do |element, rate|
+        if manager.get_subs[@element] == nil
+          ElementManager.new(@element, manager, @count * rate)
+        else
+          manager.produce!(element, @count * rate)
+        end
       end
     end
 
     def inspect
-      return "ProducerManager.new(#{@element.inspect}, #{@rate}, #{@name.inspect}, nil, #{@count})"
+      return "ProducerManager.new(#{@rate.inspect}, #{@name.inspect}, nil, #{@count})"
     end
 
     alias :old_eql? :eql?
 
     def eql?(other)
-      if @element != other.element || @rate != other.rate
+      if @rates != other.rates
         return false
       end
 
