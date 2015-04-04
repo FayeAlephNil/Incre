@@ -16,18 +16,14 @@ class CraftingManager
     self.clone.add_recipe!(ingredients, product)
   end
 
-  def craft(ingredients, first = false, manager = @manager)
+  def craft(ingredients, manager = @manager)
     if manager == nil then raise 'Did not provide a manager for this CraftingManager craft operation' end
 
     product = @recipes[ingredients]
     product.count = 1
     if check(ingredients)
       if product != nil
-        if first
-          manager.add_manager! product
-        else
-          manager.produce!(product.name, 1)
-        end
+        manager.produce!(product.name, 1, product)
       end
 
       ingredients.each do |key, amount|

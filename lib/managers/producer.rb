@@ -12,8 +12,8 @@ class ProducerManager < SubManager
 
     def tick(manager)
       @rates.each do |element, rate|
-        if manager.get_subs[@element] == nil
-          ElementManager.new(@element, manager, @count * rate)
+        if manager.get_subs[element] == nil
+          ElementManager.new(element, manager, @count * rate)
         else
           manager.produce!(element, @count * rate)
         end

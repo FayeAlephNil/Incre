@@ -11,17 +11,21 @@ class GameManager
   end
 
   #Production of things
-  def produce!(key, amount = 0)
+  def produce!(key, amount = 0, product = nil)
     if @sub_managers[key] == nil
-      raise 'Tryed to produce something which has not been added to the list of sub-managers'
+      if product == nil
+        raise 'Tryed to produce something which has not been added to the list of sub-managers'
+      else
+        self.add_manager! product
+      end
     end
     @sub_managers[key].count += amount
 
     return self
   end
 
-  def produce(key, amount = 0)
-    return self.clone.produce!
+  def produce(key, amount = 0, product = nil)
+    return self.clone.produce!(key, amount, product)
   end
 
   #Use something. Returns false (and doesn't use) if the result is less than zero and true otherwise
