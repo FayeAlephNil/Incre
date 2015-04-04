@@ -1,5 +1,3 @@
-require_relative '../util/ruby_changes'
-
 require_relative 'crafting'
 
 class GameManager
@@ -78,12 +76,12 @@ class GameManager
     end
   end
 
-  def to_eval
+  def inspect
     if @sub_managers.empty?
       return 'GameManager.new'
     end
 
-    return "GameManager.new(#{@sub_managers.to_eval}, #{@crafter.to_eval})"
+    return "GameManager.new(#{@sub_managers.inspect}, #{@crafter.inspect})"
   end
 
   def eql?(other)
@@ -97,7 +95,7 @@ class GameManager
         if !(other.get_subs[key].eql?(value)) then result = false end
       }
     end
-    
+
     threads.each { |thr|
       thr.join
       if !result then break end

@@ -24,6 +24,10 @@ class ProducerManager < SubManager
       return "ProducerManager.new(#{@element.to_eval}, #{@rate}, #{@name.to_eval}, nil, #{@count})"
     end
 
+    def inspect
+      return "ProducerManager.new(#{@element.inspect}, #{@rate}, #{@name.inspect}, nil, #{@count})"
+    end
+
     alias :old_eql? :eql?
 
     def eql?(other)

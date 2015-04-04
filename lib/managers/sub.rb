@@ -14,8 +14,8 @@ class SubManager
   def tick(manager)
   end
 
-  def to_eval
-    return "SubManager.new(#{@name.to_eval}, #{@type.to_eval}, #{@count})"
+  def inspect
+    return "SubManager.new(#{@name.inspect}, #{@type.inspect}, #{@count.inspect})"
   end
 
   def eql?(other)

@@ -1,5 +1,3 @@
-require_relative '../util/ruby_changes'
-
 class CraftingManager
   attr_accessor :recipes
   attr_accessor :manager
@@ -81,7 +79,7 @@ class CraftingManager
     return result
   end
 
-  def to_eval
-    return "CraftingManager.new(nil, #{@recipes.to_eval})"
+  def inspect
+    return "CraftingManager.new(nil, #{@recipes.inspect})"
   end
 end
