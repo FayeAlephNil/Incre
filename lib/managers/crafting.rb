@@ -64,7 +64,7 @@ class CraftingManager
   end
 
   # performs an equals check
-  def self.eql?(other)
+  def eql?(other)
     result = true
     threads = []
 
