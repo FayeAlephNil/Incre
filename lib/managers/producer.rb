@@ -20,7 +20,7 @@ class ProducerManager < SubManager
 
     # Returns valid ruby to create a new copy of this with the same vars
     def inspect
-      return "ProducerManager.new(#{@rate.inspect}, #{@name.inspect}, nil, #{@count})"
+      return "ProducerManager.new(#{@rates.inspect}, #{@name.inspect}, nil, #{@count})"
     end
 
     alias :old_eql? :eql?

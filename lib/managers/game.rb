@@ -10,7 +10,7 @@ class GameManager
     @crafter = crafter
   end
 
-  #Production of sub_managers
+  # Production of sub_managers
   def produce!(key, amount = 0, product = nil)
     if @sub_managers[key] == nil
       # Raise exception ourselves, more useful then NPE
@@ -34,7 +34,7 @@ class GameManager
     return self.clone.produce!(key, amount, product)
   end
 
-  #Use something. Returns false (and doesn't use) if the result is less than zero and true otherwise
+  # Use something. Returns false (and doesn't use) if the result is less than zero and true otherwise
   def use!(key, amount = 0)
     # Raise exception ourselves, more useful then NPE
     if @sub_managers[key] == nil
