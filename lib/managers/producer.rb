@@ -10,6 +10,7 @@ class ProducerManager < SubManager
       @rates = rates
     end
 
+    # Produces the elements at the rates defined in @rates.
     def tick(manager)
       @rates.each do |element, rate|
         if manager.get_subs[element] == nil
@@ -20,12 +21,14 @@ class ProducerManager < SubManager
       end
     end
 
+    # Returns valid ruby to create a new copy of this with the same vars
     def inspect
       return "ProducerManager.new(#{@rate.inspect}, #{@name.inspect}, nil, #{@count})"
     end
 
     alias :old_eql? :eql?
 
+    # equality test
     def eql?(other)
       if @rates != other.rates
         return false
