@@ -112,3 +112,8 @@ $RECYCLE.BIN/
 
 # sftp configuration file
 sftp-config.json
+
+### Incre Specific ###
+
+#The save file
+*.save
