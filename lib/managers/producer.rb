@@ -12,12 +12,9 @@ class ProducerManager < SubManager
 
     # Produces the elements at the rates defined in @rates.
     def tick(manager)
+      # For each element/rate pair produce the element
       @rates.each do |element, rate|
-        if manager.get_subs[element] == nil
-          ElementManager.new(element, manager, @count * rate)
-        else
-          manager.produce!(element, @count * rate)
-        end
+          manager.produce!(element, @count * rate, ElementManager.new(element))
       end
     end
 
@@ -30,10 +27,12 @@ class ProducerManager < SubManager
 
     # equality test
     def eql?(other)
+      # Check if the rates aren't equal
       if @rates != other.rates
         return false
       end
 
+      # Use the equal from SubManager to check
       return old_eql?(other)
     end
 end

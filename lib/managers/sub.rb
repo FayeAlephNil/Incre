@@ -21,6 +21,7 @@ class SubManager
 
   # equality test
   def eql?(other)
+    # Check that one of the variables aren't the same
     if @name != other.name || @type != other.type || @count != other.count
       return false
     end

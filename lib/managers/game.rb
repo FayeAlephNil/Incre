@@ -13,10 +13,15 @@ class GameManager
   #Production of sub_managers
   def produce!(key, amount = 0, product = nil)
     if @sub_managers[key] == nil
+      # Raise exception ourselves, more useful then NPE
       if product == nil
-        raise 'Tryed to produce something which has not been added to the list of sub-managers'
+        raise 'Tryed to produce something which has not been added to the
+              list of sub-managers without providing it to produce'
       else
+        # Make sure we produce the same amount we wanted to and then add it
+        product.count = amount
         self.add_manager! product
+        return self
       end
     end
     @sub_managers[key].count += amount
@@ -31,14 +36,16 @@ class GameManager
 
   #Use something. Returns false (and doesn't use) if the result is less than zero and true otherwise
   def use!(key, amount = 0)
+    # Raise exception ourselves, more useful then NPE
     if @sub_managers[key] == nil
       raise 'Tryed to use something which has not been added to the list of sub-managers'
     end
 
+    # Make sure we won't get negative
     if @sub_managers[key].count >= amount
       @sub_managers[key].count -= amount
-        return true
-      end
+      return true
+    end
     return false
   end
 
@@ -98,17 +105,22 @@ class GameManager
 
   # equality test
   def eql?(other)
+    # If the crafters aren't equal return false
     if !(@crafter.eql?(other.crafter)) then return false end
 
+    # Default result is true, make a threads array
     result = true
     threads = []
 
+    # for each key/value pair in sub_managers make a new thread
     @sub_managers.each do |key, value|
       threads << Thread.new {
+        # If the values for the key are not equal make result false
         if !(other.get_subs[key].eql?(value)) then result = false end
       }
     end
 
+    # Execute the threads, breaking if the result is ever false
     threads.each { |thr|
       thr.join
       if !result then break end
